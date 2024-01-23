@@ -4,9 +4,9 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 const particles = [];
-const particleCount = 1000; // Adjust for more or fewer particles
+const particleCount = 5000; // Adjust for more or fewer particles
 const heartScale = 10; // Adjust to scale the heart size
-const expansionRate = 0.1; // Adjust to control the expansion speed
+const expansionRate = 0.05; // Adjust to control the expansion speed
 
 // Heart shape formula
 function heartShape(t) {
@@ -33,8 +33,8 @@ class Particle {
 	const dx = this.targetX - this.x;
         const dy = this.targetY - this.y;
         
-	this.x += dx * 0.8
-	this.y += dy * 0.8
+	this.x += dx * 0.6
+	this.y += dy * 0.6
 	    
         this.color = 'pink';
         this.size = Math.random() * 2 + 1;
@@ -49,8 +49,17 @@ class Particle {
             this.reset();
         }
     }
+    
+   getBrightness() {
+        const dx = this.targetX - this.x;
+        const dy = this.targetY - this.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        // Fluctuating brightness: sine wave pattern based on distance
+        return 0.5 + 0.5 * Math.sin(distance * 0.1);
+    }
 
     draw() {
+	 ctx.globalAlpha = this.getBrightness();
         ctx.fillStyle = this.color;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
