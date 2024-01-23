@@ -54,7 +54,7 @@ class Particle {
 	this.x += dx * 0.7
 	this.y += dy * 0.7
 	    
-        this.color = 'pink';
+        this.updateColor();
         this.size = Math.random() * 2 + 1;
     }
 
@@ -63,9 +63,11 @@ class Particle {
         const dy = this.targetY - this.y;
         this.x += dx * expansionRate;
         this.y += dy * expansionRate;
+	this.updateColor();
         if (Math.abs(dx) < 0.1 && Math.abs(dy) < 0.1) {
             this.reset();
         }
+
     }
     
    getBrightness() {
