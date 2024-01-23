@@ -57,6 +57,9 @@ class Particle {
 	    
         this.updateColor();
         this.size = Math.random() * 3 + .5;
+        this.maxDistance = Math.sqrt((this.targetX - canvas.width/2)*(this.targetX - canvas.width/2)*startRange*startRange + (this.targetY - canvas.height/2)*(this.targetY - canvas.height/2)*startRange*startRange);
+        
+
     }
 
     update() {
@@ -65,7 +68,7 @@ class Particle {
         this.x += dx * expansionRate;
         this.y += dy * expansionRate;
 	this.updateColor();
-        if (Math.abs(dx) < 1 && Math.abs(dy) < 1) {
+        if (this.getDistance()/this.maxDistance < Math.random()*0.3) {
             this.reset();
         }
 
@@ -73,14 +76,12 @@ class Particle {
     
    getBrightness() {
         // Fluctuating brightness: sine wave pattern based on distance
-         const maxDistance = Math.sqrt((this.targetX - canvas.width/2)*(this.targetX - canvas.width/2)*startRange*startRange + (this.targetY - canvas.height/2)*(this.targetY - canvas.height/2)*startRange*startRange);
         
-	 return 0.5 + 0.5 * Math.sin(this.getDistance()/maxDistance * 4);
+	 return 0.5 + 0.5 * Math.sin(this.getDistance()/this.maxDistance * 4);
     }
    updateColor() {
-        const maxDistance = Math.sqrt((this.targetX - canvas.width/2)*(this.targetX - canvas.width/2)*startRange*startRange + (this.targetY - canvas.height/2)*(this.targetY - canvas.height/2)*startRange*startRange);
         const distance = this.getDistance();
-        const normalizedDistance = 1 - (distance / maxDistance); // Normalizing distance
+        const normalizedDistance = 1 - (distance / this.maxDistance); // Normalizing distance
         const color = interpolateColor(normalizedDistance);
         this.color = `rgb(${color.r}, ${color.g}, ${color.b})`;
     }
