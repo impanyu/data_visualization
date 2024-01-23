@@ -34,7 +34,7 @@ class Particle {
         const dy = this.targetY - this.y;
         
 	this.x += dx * 0.8
-	this.y += dx * 0.8
+	this.y += dy * 0.8
 	    
         this.color = 'pink';
         this.size = Math.random() * 2 + 1;
