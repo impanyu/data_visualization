@@ -4,7 +4,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 const particles = [];
-const particleCount = 5000; // Adjust for more or fewer particles
+const particleCount = 10000; // Adjust for more or fewer particles
 const heartScale = 10; // Adjust to scale the heart size
 const expansionRate = 0.05; // Adjust to control the expansion speed
 
@@ -55,7 +55,7 @@ class Particle {
 	this.y += dy * (0.6+Math.random()*0.4)
 	    
         this.updateColor();
-        this.size = Math.random() * 2;
+        this.size = Math.random() * 3 + .5;
     }
 
     update() {
