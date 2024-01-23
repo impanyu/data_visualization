@@ -6,7 +6,20 @@ canvas.height = window.innerHeight;
 const particles = [];
 const particleCount = 5000; // Adjust for more or fewer particles
 const heartScale = 10; // Adjust to scale the heart size
-const expansionRate = 0.05; // Adjust to control the expansion speed
+const expansionRate = 0.0; // Adjust to control the expansion speed
+
+// Function to interpolate between pink and red
+function interpolateColor(distance) {
+    // Assuming distance is normalized between 0 and 1
+    const pink = { r: 255, g: 192, b: 203 }; // RGB for pink
+    const red = { r: 255, g: 0, b: 0 }; // RGB for red
+
+    return {
+        r: pink.r + (red.r - pink.r) * distance,
+        g: pink.g + (red.g - pink.g) * distance,
+        b: pink.b + (red.b - pink.b) * distance,
+    };
+}
 
 // Heart shape formula
 function heartShape(t) {
@@ -21,6 +34,11 @@ class Particle {
     constructor() {
         this.reset();
     }
+    getDistance() {
+        const dx = this.targetX - this.x;
+        const dy = this.targetY - this.y;
+        return Math.sqrt(dx * dx + dy * dy);
+    }
 
     reset() {
         const angle = Math.random() * Math.PI * 2;
@@ -33,8 +51,8 @@ class Particle {
 	const dx = this.targetX - this.x;
         const dy = this.targetY - this.y;
         
-	this.x += dx * 0.6
-	this.y += dy * 0.6
+	this.x += dx * 0.7
+	this.y += dy * 0.7
 	    
         this.color = 'pink';
         this.size = Math.random() * 2 + 1;
@@ -51,11 +69,15 @@ class Particle {
     }
     
    getBrightness() {
-        const dx = this.targetX - this.x;
-        const dy = this.targetY - this.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
         // Fluctuating brightness: sine wave pattern based on distance
-        return 0.5 + 0.5 * Math.sin(distance * 0.1);
+        return 0.5 + 0.5 * Math.sin(this.getDistance() * 0.1);
+    }
+   updateColor() {
+        const maxDistance = Math.sqrt(canvas.width * canvas.width + canvas.height * canvas.height);
+        const distance = this.getDistance();
+        const normalizedDistance = 1 - (distance / maxDistance); // Normalizing distance
+        const color = interpolateColor(normalizedDistance);
+        this.color = `rgb(${color.r}, ${color.g}, ${color.b})`;
     }
 
     draw() {
