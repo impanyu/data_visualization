@@ -7,7 +7,7 @@ const particles = [];
 const particleCount = 10000; // Adjust for more or fewer particles
 const heartScale = 10; // Adjust to scale the heart size
 const expansionRate = 0.05; // Adjust to control the expansion speed
-const startRange = 0.7;
+const startRange = 0.4;
 
 // Function to interpolate between pink and red
 function interpolateColor(distance) {
