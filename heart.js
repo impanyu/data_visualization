@@ -83,7 +83,7 @@ class Particle {
     }
 
     draw() {
-	 ctx.globalAlpha = this.getBrightness();
+	 //ctx.globalAlpha = this.getBrightness();
         ctx.fillStyle = this.color;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
