@@ -51,11 +51,11 @@ class Particle {
 	const dx = this.targetX - this.x;
         const dy = this.targetY - this.y;
         
-	this.x += dx * 0.7
-	this.y += dy * 0.7
+	this.x += dx * (0.6+Math.random()*0.4) 
+	this.y += dy * (0.6+Math.random()*0.4)
 	    
         this.updateColor();
-        this.size = Math.random() * 2 + 1;
+        this.size = Math.random() * 2;
     }
 
     update() {
@@ -72,7 +72,7 @@ class Particle {
     
    getBrightness() {
         // Fluctuating brightness: sine wave pattern based on distance
-        return 0.5 + 0.5 * Math.sin(this.getDistance() * 0.1);
+        return 0.5 + 0.5 * Math.sin(this.getDistance() * 0.8);
     }
    updateColor() {
         const maxDistance = Math.sqrt(canvas.width * canvas.width + canvas.height * canvas.height);
@@ -83,7 +83,7 @@ class Particle {
     }
 
     draw() {
-	 //ctx.globalAlpha = this.getBrightness();
+	ctx.globalAlpha = this.getBrightness();
         ctx.fillStyle = this.color;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
