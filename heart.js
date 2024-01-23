@@ -7,6 +7,7 @@ const particles = [];
 const particleCount = 10000; // Adjust for more or fewer particles
 const heartScale = 10; // Adjust to scale the heart size
 const expansionRate = 0.05; // Adjust to control the expansion speed
+const startRange = 0.3;
 
 // Function to interpolate between pink and red
 function interpolateColor(distance) {
@@ -51,8 +52,8 @@ class Particle {
 	const dx = this.targetX - this.x;
         const dy = this.targetY - this.y;
         
-	this.x += dx * (0.6+Math.random()*0.4) 
-	this.y += dy * (0.6+Math.random()*0.4)
+	this.x += dx * ((1-startRange)+Math.random()*startRange) 
+	this.y += dy * ((1-startRange)+Math.random()*startRange)
 	    
         this.updateColor();
         this.size = Math.random() * 3 + .5;
@@ -75,7 +76,7 @@ class Particle {
         return 0.5 + 0.5 * Math.sin(this.getDistance() * 0.8);
     }
    updateColor() {
-        const maxDistance = Math.sqrt((this.targetX - canvas.width/2)*(this.targetX - canvas.width/2)*0.4*0.4 + (this.targetY - canvas.height/2)*(this.targetY - canvas.height/2)*0.4*0.4);
+        const maxDistance = Math.sqrt((this.targetX - canvas.width/2)*(this.targetX - canvas.width/2)*startRange*startRange + (this.targetY - canvas.height/2)*(this.targetY - canvas.height/2)*startRange*startRange);
         const distance = this.getDistance();
         const normalizedDistance = 1 - (distance / maxDistance); // Normalizing distance
         const color = interpolateColor(normalizedDistance);
