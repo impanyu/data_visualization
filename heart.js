@@ -75,7 +75,7 @@ class Particle {
         return 0.5 + 0.5 * Math.sin(this.getDistance() * 0.8);
     }
    updateColor() {
-        const maxDistance = Math.sqrt(canvas.width * canvas.width + canvas.height * canvas.height);
+        const maxDistance = Math.sqrt((this.targetX - canvas.width/2)*(this.targetX - canvas.width/2)*0.4*0.4 + (this.targetY - canvas.height/2)*(this.targetY - canvas.height/2)*0.4*0.4);
         const distance = this.getDistance();
         const normalizedDistance = 1 - (distance / maxDistance); // Normalizing distance
         const color = interpolateColor(normalizedDistance);
