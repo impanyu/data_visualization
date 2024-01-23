@@ -54,7 +54,7 @@ class Particle {
 	this.x += dx * 0.7
 	this.y += dy * 0.7
 	    
-        this.updateColor();
+        //this.updateColor();
         this.size = Math.random() * 2 + 1;
     }
 
