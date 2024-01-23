@@ -7,7 +7,7 @@ const particles = [];
 const particleCount = 10000; // Adjust for more or fewer particles
 const heartScale = 10; // Adjust to scale the heart size
 const expansionRate = 0.05; // Adjust to control the expansion speed
-const startRange = 0.5;
+const startRange = 0.4;
 
 // Function to interpolate between pink and red
 function interpolateColor(distance) {
@@ -65,7 +65,7 @@ class Particle {
         this.x += dx * expansionRate;
         this.y += dy * expansionRate;
 	this.updateColor();
-        if (Math.abs(dx) < 0.1 && Math.abs(dy) < 0.1) {
+        if (Math.abs(dx) < 1 && Math.abs(dy) < 1) {
             this.reset();
         }
 
@@ -75,7 +75,7 @@ class Particle {
         // Fluctuating brightness: sine wave pattern based on distance
          const maxDistance = Math.sqrt((this.targetX - canvas.width/2)*(this.targetX - canvas.width/2)*startRange*startRange + (this.targetY - canvas.height/2)*(this.targetY - canvas.height/2)*startRange*startRange);
         
-	 return 0.5 + 0.5 * Math.sin(this.getDistance()/maxDistance * 2);
+	 return 0.5 + 0.5 * Math.sin(this.getDistance()/maxDistance * 4);
     }
    updateColor() {
         const maxDistance = Math.sqrt((this.targetX - canvas.width/2)*(this.targetX - canvas.width/2)*startRange*startRange + (this.targetY - canvas.height/2)*(this.targetY - canvas.height/2)*startRange*startRange);
