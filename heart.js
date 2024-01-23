@@ -63,7 +63,7 @@ class Particle {
         const dy = this.targetY - this.y;
         this.x += dx * expansionRate;
         this.y += dy * expansionRate;
-	this.updateColor();
+	//this.updateColor();
         if (Math.abs(dx) < 0.1 && Math.abs(dy) < 0.1) {
             this.reset();
         }
@@ -84,7 +84,7 @@ class Particle {
 
     draw() {
 	 ctx.globalAlpha = this.getBrightness();
-        //ctx.fillStyle = this.color;
+        ctx.fillStyle = this.color;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
