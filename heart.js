@@ -6,7 +6,7 @@ canvas.height = window.innerHeight;
 const particles = [];
 const particleCount = 5000; // Adjust for more or fewer particles
 const heartScale = 10; // Adjust to scale the heart size
-const expansionRate = 0.0; // Adjust to control the expansion speed
+const expansionRate = 0.05; // Adjust to control the expansion speed
 
 // Function to interpolate between pink and red
 function interpolateColor(distance) {
@@ -54,7 +54,7 @@ class Particle {
 	this.x += dx * 0.7
 	this.y += dy * 0.7
 	    
-        //this.updateColor();
+        this.updateColor();
         this.size = Math.random() * 2 + 1;
     }
 
@@ -63,9 +63,9 @@ class Particle {
         const dy = this.targetY - this.y;
         this.x += dx * expansionRate;
         this.y += dy * expansionRate;
-	//this.updateColor();
+	this.updateColor();
         if (Math.abs(dx) < 0.1 && Math.abs(dy) < 0.1) {
-            //this.reset();
+            this.reset();
         }
 
     }
