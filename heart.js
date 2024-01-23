@@ -29,6 +29,13 @@ class Particle {
         this.y = canvas.height / 2;
         this.targetX = canvas.width / 2 + heartPoint.x * heartScale;
         this.targetY = canvas.height / 2 + heartPoint.y * heartScale;
+	
+	const dx = this.targetX - this.x;
+        const dy = this.targetY - this.y;
+        
+	this.x += dx * 0.8
+	this.y += dx * 0.8
+	    
         this.color = 'pink';
         this.size = Math.random() * 2 + 1;
     }
