@@ -68,7 +68,7 @@ class Particle {
         this.x += dx * expansionRate;
         this.y += dy * expansionRate;
 	this.updateColor();
-        if (this.getDistance()/this.maxDistance < Math.random()*0.1) {
+        if (this.getDistance()/this.maxDistance < Math.random()*0.6) {
             this.reset();
         }
 
